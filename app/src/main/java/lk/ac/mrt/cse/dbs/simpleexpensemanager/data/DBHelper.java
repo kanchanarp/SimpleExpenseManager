@@ -17,8 +17,6 @@ import lk.ac.mrt.cse.dbs.simpleexpensemanager.data.model.Transaction;
  */
 public class DBHelper extends SQLiteOpenHelper{
     public static final String DB_NAME = "130519D.db";
-    public static final String TABLE_ACCOUNT = "account";
-    public static final String TABLE_TRANS = "transaction";
 
 
     public DBHelper(Context context) {
