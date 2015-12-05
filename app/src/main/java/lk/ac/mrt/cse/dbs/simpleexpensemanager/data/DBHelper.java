@@ -32,8 +32,8 @@ public class DBHelper extends SQLiteOpenHelper{
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS account");
-        db.execSQL("DROP TABLE IF EXISTS transaction");
+        db.execSQL("DROP TABLE IF EXISTS Account");
+        db.execSQL("DROP TABLE IF EXISTS Transaction");
         onCreate(db);
     }
 
