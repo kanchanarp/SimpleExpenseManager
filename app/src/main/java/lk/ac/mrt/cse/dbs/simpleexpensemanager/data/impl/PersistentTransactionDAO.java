@@ -29,7 +29,7 @@ public class PersistentTransactionDAO implements TransactionDAO{
     public void logTransaction(Date date, String accountNo, ExpenseType expenseType, double amount) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("date", String.valueOf(date));
+        contentValues.put("date", date.getTime());
         contentValues.put("accountNo", accountNo);
         if(expenseType==ExpenseType.INCOME){
             contentValues.put("expenseType", true);
@@ -48,14 +48,14 @@ public class PersistentTransactionDAO implements TransactionDAO{
         Cursor res=db.rawQuery("select * from Transaction order by date desc",null);
         res.moveToFirst();
         Transaction transaction;
-        DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        Date date;
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date date=new Date();
         String accountNo;
         ExpenseType expenseType;
         double amount;
         while(res.isAfterLast() == false){
             try {
-                date=format.parse(res.getString(1));
+                date=format.parse(format.format(new Date(res.getLong(1))));
                 accountNo=res.getString(2);
                 if(res.getInt(3)>0){
                     expenseType=ExpenseType.INCOME;

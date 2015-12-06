@@ -21,13 +21,12 @@ public class DBHelper extends SQLiteOpenHelper{
 
     public DBHelper(Context context) {
         super(context, DB_NAME, null, 1);
-        SQLiteDatabase db = this.getWritableDatabase();
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table Account (accountNo TEXT PRIMARY KEY ,bankName TEXT,accountHolderName TEXT,balance DECIMAL(12,2))");
-        db.execSQL("create table Transaction (ID INTEGER PRIMARY KEY AUTOINCREMENT,date DATE,accountNo TEXT,expenseType BOOLEAN,amount DECIMAL(12,2), FOREIGN KEY (accountNo) REFERENCES Account(accountNo))");
+        db.execSQL("create table Account (accountNo TEXT PRIMARY KEY ,bankName TEXT,accountHolderName TEXT,balance DECIMAL(10,2))");
+        db.execSQL("create table Transaction (ID INTEGER PRIMARY KEY AUTOINCREMENT,date BIGINT,accountNo TEXT,expenseType BOOLEAN,amount DECIMAL(10,2), FOREIGN KEY (accountNo) REFERENCES Account(accountNo))");
     }
 
     @Override
